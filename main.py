@@ -3,6 +3,8 @@ import urllib.request
 from bs4 import BeautifulSoup
 import os
 from string import ascii_lowercase
+import random
+
 i=1
 def make_soup(url):
     thepage= urllib.request.urlopen(url)
@@ -13,10 +15,15 @@ SKU = input()
 
 soup = make_soup("https://www.neutrik.com/en/product/" + SKU)
 
+file_name= str(SKU)
+
 for texta in soup.findAll('div',{"class":"editor-style"}):
         print(texta.find('p').text)
-
-for img in soup.findAll('img',{'alt': 'NADB15FF'}):
+        content= texta.find('p').text
+        with open('./{}.txt'.format(file_name), mode='wt', encoding='utf-8') as file:
+            file.write(content)
+            
+for img in soup.findAll('img',{'alt': 'BST-BNC'}):
     temp=img.get('src')
     if temp[:1]=="/":
         image = "https://www.neutrik.com/uploads/media" + temp

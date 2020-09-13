@@ -22,8 +22,8 @@ for texta in soup.findAll('div',{"class":"editor-style"}):
         content= texta.find('p').text
         with open('./{}.txt'.format(file_name), mode='wt', encoding='utf-8') as file:
             file.write(content)
-            
-for img in soup.findAll('img',{'alt': 'BST-BNC'}):
+
+for img in soup.findAll('img',{'alt': str(SKU)}):
     temp=img.get('src')
     if temp[:1]=="/":
         image = "https://www.neutrik.com/uploads/media" + temp

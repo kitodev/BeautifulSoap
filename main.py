@@ -1,5 +1,5 @@
 import urllib
-import urllib.request
+import urllib.request 
 from bs4 import BeautifulSoup
 import os
 from string import ascii_lowercase
@@ -11,6 +11,7 @@ def make_soup(url):
     soupdata = BeautifulSoup(thepage, "html.parser")
     return soupdata
 
+
 SKU = input()
 
 soup = make_soup("https://www.neutrik.com/en/product/" + SKU)
@@ -18,8 +19,8 @@ soup = make_soup("https://www.neutrik.com/en/product/" + SKU)
 file_name= str(SKU)
 
 for texta in soup.findAll('div',{"class":"editor-style"}):
-        print(texta.find('p').text)
-        content= texta.find('p').text
+        print(texta.text)
+        content= texta.text
         with open('./{}.txt'.format(file_name), mode='wt', encoding='utf-8') as file:
             file.write(content)
 
@@ -32,7 +33,6 @@ for img in soup.findAll('img',{'alt': str(SKU)}):
 
     print(image)
 
-    
     nametemp = img.get('alt')
     if len(nametemp)==0:
         filename=str(i)
